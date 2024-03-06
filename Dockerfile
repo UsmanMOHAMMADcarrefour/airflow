@@ -54,11 +54,11 @@ RUN set -ex \
     && locale-gen \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
-    && pip install -U pip setuptools wheel \
-    && pip install pytz \
-    && pip install pyOpenSSL \
-    && pip install ndg-httpsclient \
-    && pip install pyasn1 \
+    && pip install -U pip setuptools wheel --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org  \
+    && pip install pytz --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org \
+    && pip install pyOpenSSL --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org \
+    && pip install ndg-httpsclient --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org \
+    && pip install pyasn1 --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org \
     && pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
     && pip install 'redis==3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS} --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org; fi \
